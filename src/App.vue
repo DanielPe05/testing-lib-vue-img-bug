@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <img alt="Vue logo" :src="logoUrl" data-testid="logo" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
-  name: "App",
-  components: {
-    HelloWorld
+  name: 'App',
+  props: {
+    defaultImage: Boolean
+  },
+  computed: {
+    logoUrl() {
+      const imagePath = this.defaultImage ? 'logo-default.png' : 'logo.png'
+      return require(`./assets/${imagePath}`)
+    }
   }
-};
+}
 </script>
 
 <style lang="scss">

@@ -1,12 +1,14 @@
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/vue'
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    });
-    expect(wrapper.text()).toMatch(msg);
-  });
-});
+import App from '@/App.vue'
+
+describe('App.vue', () => {
+  it('renders correct image', () => {
+    const { getByTestId } = render(App, {
+      props: { defaultImage: true }
+    })
+
+    expect(getByTestId('logo')).toHaveAttribute('src', './assets/logo-default.png')
+  })
+})
